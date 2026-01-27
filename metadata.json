@@ -1,0 +1,7 @@
+{
+  "name": "Global Minds Forge",
+  "description": "A scientific-informational social network for engineers, investors, and researchers to solve business challenges together.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
