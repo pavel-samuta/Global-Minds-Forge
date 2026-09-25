@@ -1,110 +1,42 @@
 import React from 'react';
-import Hero from './components/Hero';
-import NetworkGraph from './components/NetworkGraph';
-import RatingChart from './components/RatingChart';
-import ProjectAnalyzer from './components/ProjectAnalyzer';
-import AIChat from './components/AIChat';
-import { Globe, Users, TrendingUp, Search, Award } from 'lucide-react';
+import { ArrowUpRight, Compass, DraftingCompass, Globe2, Handshake, Layers3, Mail, Menu, ShieldCheck } from 'lucide-react';
+import './style.css';
 
-function App() {
-  return (
-    <div className="min-h-screen bg-brand-950 text-slate-200 font-sans selection:bg-brand-500/30">
-      
-      {/* Navigation */}
-      <nav className="fixed w-full z-40 bg-brand-950/80 backdrop-blur-md border-b border-slate-800">
-        <div className="container mx-auto px-6 h-20 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="bg-brand-600 p-2 rounded-lg">
-              <Globe className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-white tracking-tight">Global Minds Forge</span>
-          </div>
-          <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
-            <a href="#about" className="hover:text-white transition-colors">О нас</a>
-            <a href="#features" className="hover:text-white transition-colors">Возможности</a>
-            <a href="#investment" className="hover:text-white transition-colors">Инвесторам</a>
-          </div>
+const contact = 'https://pavelsamuta.com/';
+const steps = [
+  { n: '01', title: 'Задача', text: 'Компания описывает техническую и экономическую проблему: ограничение, сроки, ожидаемый результат.' },
+  { n: '02', title: 'Команда', text: 'Инженеры, исследователи и производственные партнёры собираются вокруг конкретной задачи.' },
+  { n: '03', title: 'Проверка', text: 'Гипотеза проходит расчёт, прототипирование и проверку на технологичность.' },
+  { n: '04', title: 'Внедрение', text: 'Результат доводится до документации, изготовления и повторяемого применения.' },
+];
+
+export default function App() {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  return <>
+    <header className="site-header">
+      <div className="wrap nav">
+        <a href="#top" className="logo" aria-label="Global Minds Forge, наверх"><span className="logo-mark">GMF<span>.</span></span><span className="logo-name">GLOBAL MINDS<br/>FORGE</span></a>
+        <button className="mobile-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Открыть меню" aria-expanded={menuOpen}><Menu size={25}/></button>
+        <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Основная навигация" onClick={() => setMenuOpen(false)}>
+          <a href="#concept">Концепция</a><a href="#model">Как работает</a><a href="#investment">Инвесторам</a><a className="nav-contact" href="#contact">Связаться <ArrowUpRight size={15}/></a>
+        </nav>
+      </div>
+    </header>
+    <main id="top">
+      <section className="hero wrap">
+        <div className="hero-copy"><p className="eyebrow"><span className="pulse"/> ПРОЕКТ • GLOBAL MINDS FORGE</p>
+          <h1>Идеи становятся<br/><em>инженерными</em><br/>решениями.</h1>
+          <p className="lead">GMF объединяет инженеров, исследователей, производителей и инвесторов вокруг задач, которые требуют больше одной компетенции.</p>
+          <div className="actions"><a className="button primary" href="#investment">Для инвестора <ArrowUpRight size={18}/></a><a className="button ghost" href="#model">Как это работает <span>↘</span></a></div>
+          <p className="hero-note">Инициатор проекта: Павел Самута, инженер-механик. В профессии с 2007 года.</p>
         </div>
-      </nav>
-
-      <main>
-        <Hero />
-
-        {/* Features Grid */}
-        <section id="features" className="py-20 bg-slate-900/50">
-          <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              
-              <div className="space-y-12">
-                <div className="max-w-xl">
-                  <h2 className="text-3xl font-bold text-white mb-6">Инновационная экосистема</h2>
-                  <p className="text-slate-400 leading-relaxed">
-                    Мы стимулируем прогресс путем совместного исследования, инжиниринга и обучения. Найдите единомышленников и финансирование в одном месте.
-                  </p>
-                </div>
-
-                <div className="grid gap-6">
-                  <div className="flex gap-4 p-4 bg-slate-800/40 rounded-xl border border-slate-700/50">
-                    <div className="bg-blue-500/10 p-3 rounded-lg h-fit">
-                      <Award className="w-6 h-6 text-blue-400" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">ERI (Инженерный рейтинг)</h4>
-                      <p className="text-sm text-slate-400">Постоянный идентификатор, отражающий историю разработок, публикации и опыт.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-4 p-4 bg-slate-800/40 rounded-xl border border-slate-700/50">
-                    <div className="bg-purple-500/10 p-3 rounded-lg h-fit">
-                      <Search className="w-6 h-6 text-purple-400" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">Семантический поиск</h4>
-                      <p className="text-sm text-slate-400">Умный поиск связей, проектов и научных публикаций по смысловому соответствию.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 p-4 bg-slate-800/40 rounded-xl border border-slate-700/50">
-                    <div className="bg-green-500/10 p-3 rounded-lg h-fit">
-                      <TrendingUp className="w-6 h-6 text-green-400" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">Инвестиции</h4>
-                      <p className="text-sm text-slate-400">Прямой доступ к инвесторам для перспективных инженерных команд.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid gap-6">
-                <RatingChart />
-                <NetworkGraph />
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* Project Analyzer Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-6">
-             <ProjectAnalyzer />
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="bg-brand-950 border-t border-slate-800 py-12">
-          <div className="container mx-auto px-6 text-center">
-            <p className="text-slate-500 mb-4">© 2024 Global Minds Forge. Все права защищены.</p>
-            <p className="text-slate-600 text-sm">Павел Самута</p>
-          </div>
-        </footer>
-      </main>
-
-      {/* Floating Chat Assistant */}
-      <AIChat />
-    </div>
-  );
+        <div className="hero-visual" aria-hidden="true"><div className="orbit o1"/><div className="orbit o2"/><div className="orbit o3"/><div className="core">GMF</div><span className="node a">ENGINEERING</span><span className="node b">RESEARCH</span><span className="node c">INDUSTRY</span><span className="node d">CAPITAL</span></div>
+      </section>
+      <section className="band"><div className="wrap band-inner"><span>ОТ ЗАПРОСА К РЕЗУЛЬТАТУ</span><span>ИНЖЕНЕРИЯ × НАУКА × ПРОИЗВОДСТВО</span><span>GLOBAL MINDS FORGE</span></div></section>
+      <section id="concept" className="section wrap"><div className="section-head"><p className="eyebrow">01 / КОНЦЕПЦИЯ</p><h2>Между хорошей идеей и работающим изделием обычно стоит целая производственная цепочка.</h2></div><div className="concept-grid"><p className="large-text">GMF задуман как среда, где участники собирают эту цепочку вокруг задачи и видят вклад друг друга.</p><div className="concept-list"><div><Compass/><h3>Найти компетенцию</h3><p>Соединить задачу с нужными специалистами и производственными возможностями.</p></div><div><Layers3/><h3>Сохранить контекст</h3><p>Фиксировать решения, версии и инженерные основания, чтобы знания не исчезали вместе с участником.</p></div><div><ShieldCheck/><h3>Проверить результат</h3><p>Перевести идею в проверяемые требования, прототип и план внедрения.</p></div></div></div></section>
+      <section id="model" className="section model"><div className="wrap"><div className="section-head"><p className="eyebrow">02 / МОДЕЛЬ</p><h2>Путь проекта</h2><p>От технического запроса до воспроизводимого результата.</p></div><div className="step-grid">{steps.map(step => <article className="step" key={step.n}><span>{step.n}</span><h3>{step.title}</h3><p>{step.text}</p></article>)}</div><p className="caption">Это проектная модель GMF. Возможности платформы и правила участия будут уточняться по мере разработки.</p></div></section>
+      <section id="investment" className="section investment"><div className="wrap investment-grid"><div><p className="eyebrow">03 / ИНВЕСТОРАМ И ПАРТНЁРАМ</p><h2>Инвестировать в путь от экспертизы до внедрения.</h2><p className="large-text">GMF предлагает проверить модель сети на реальных промышленных задачах: собрать компетенции, проследить ход разработки и довести решение до производства.</p><a className="button primary" href={contact}>Обсудить партнёрство <ArrowUpRight size={18}/></a></div><div className="investment-panel"><div className="panel-top"><span>GMF / ИНВЕСТИЦИОННЫЙ ТЕЗИС</span><Globe2 size={23}/></div><div className="panel-row"><DraftingCompass/><div><h3>Проблема</h3><p>Сложным проектам трудно собрать вместе инженерию, научную экспертизу, производство и капитал.</p></div></div><div className="panel-row"><Handshake/><div><h3>Гипотеза</h3><p>Единая среда для поиска участников и ведения проекта сократит потери на стыках этих команд.</p></div></div><div className="panel-row"><Compass/><div><h3>Что проверять сначала</h3><p>Спрос со стороны предприятий, повторяемость процесса и готовность партнёров участвовать в пилотах.</p></div></div><p className="panel-foot">Стадия: концепция / ранний прототип. Финансовые показатели и условия инвестирования обсуждаются после проверки исходных данных.</p></div></div></section>
+      <section id="contact" className="section contact wrap"><p className="eyebrow">04 / КОНТАКТ</p><h2>Есть промышленная задача<br/>или интерес к GMF?</h2><p>Свяжитесь с Павлом Самутой через его сайт. Укажите задачу, роль вашей команды и удобный способ связи.</p><a className="button primary" href={contact}><Mail size={18}/> Контакты Павла <ArrowUpRight size={18}/></a></section>
+    </main><footer><div className="wrap footer-inner"><span className="logo-mark">GMF<span>.</span></span><span>© {new Date().getFullYear()} Global Minds Forge · Павел Самута</span><a href="#top">Наверх ↑</a></div></footer>
+  </>;
 }
-
-export default App;
